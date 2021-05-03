@@ -1,9 +1,6 @@
 package com.employee.employeespringboot.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "employee")
 public class Employee {
@@ -15,10 +12,16 @@ public class Employee {
     private String emp_name;
     private String emp_email;
     private String emp_pass;
-    private Integer emp_dept;
-    private Integer emp_prj;
     private String emp_join;
     public Employee(){}
+
+    @ManyToOne
+    @JoinColumn(name="emp_dept")
+    private Department department;
+
+    @ManyToOne
+    @JoinColumn(name="emp_prj")
+    private Project project;
 
     public Long getEmp_id() {
         return emp_id;
@@ -60,21 +63,7 @@ public class Employee {
         this.emp_pass = emp_pass;
     }
 
-    public Integer getEmp_dept() {
-        return emp_dept;
-    }
 
-    public void setEmp_dept(Integer emp_dept) {
-        this.emp_dept = emp_dept;
-    }
-
-    public Integer getEmp_prj() {
-        return emp_prj;
-    }
-
-    public void setEmp_prj(Integer emp_prj) {
-        this.emp_prj = emp_prj;
-    }
 
     public String getEmp_join() {
         return emp_join;
@@ -82,5 +71,21 @@ public class Employee {
 
     public void setEmp_join(String emp_join) {
         this.emp_join = emp_join;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }
